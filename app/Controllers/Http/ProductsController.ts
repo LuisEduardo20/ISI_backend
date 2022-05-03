@@ -17,13 +17,13 @@ export default class ProductsController {
     const { id } = request.params()
 
     try {
-      const product = await Product.findOrFail(id)
+      const product = await Product.find(id)
 
       if (product) {
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        const { codigo, nome, nome_fornecedor, email_fornecedor } = product['$attributes']
+        const { id, codigo, nome, nome_fornecedor, email_fornecedor } = product['$attributes']
 
-        response.ok({ codigo, nome, nome_fornecedor, email_fornecedor })
+        response.ok({ id, codigo, nome, nome_fornecedor, email_fornecedor })
       } else {
         response.notFound({ error: 'Desculpe, não encontramos o produto :(' })
       }
@@ -50,12 +50,17 @@ export default class ProductsController {
     const data = request.body()
 
     try {
-      const product = await Product.findOrFail(id)
+      const product = await Product.find(id)
 
-      await product.merge(data)
-      await product.save()
+      if (product){
+        await product.merge(data)
+        await product.save()
 
-      response.ok({ status: 'Produto atualizado com sucesso!' })
+        response.ok({ status: 'Produto atualizado com sucesso!' })
+      }else{
+        response.notFound({ error: 'Desculpe, não encontramos o produto :(' })
+      }
+
     } catch (error) {
       response.internalServerError({ error: 'Ops, algo de errado aconteceu!' })
     }
@@ -65,9 +70,13 @@ export default class ProductsController {
     const { id } = request.params()
 
     try {
-      const product = await Product.findOrFail(id)
+      const product = await Product.find(id)
 
-      await product.delete()
+      if(product){
+        await product.delete()
+      }else{
+        response.notFound({ error: 'Desculpe, não encontramos o produto :(' })
+      }
 
       response.ok
     } catch (error) {
