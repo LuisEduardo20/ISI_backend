@@ -52,15 +52,14 @@ export default class ProductsController {
     try {
       const product = await Product.find(id)
 
-      if (product){
+      if (product) {
         await product.merge(data)
         await product.save()
 
         response.ok({ status: 'Produto atualizado com sucesso!' })
-      }else{
+      } else {
         response.notFound({ error: 'Desculpe, não encontramos o produto :(' })
       }
-
     } catch (error) {
       response.internalServerError({ error: 'Ops, algo de errado aconteceu!' })
     }
@@ -72,9 +71,9 @@ export default class ProductsController {
     try {
       const product = await Product.find(id)
 
-      if(product){
+      if (product) {
         await product.delete()
-      }else{
+      } else {
         response.notFound({ error: 'Desculpe, não encontramos o produto :(' })
       }
 

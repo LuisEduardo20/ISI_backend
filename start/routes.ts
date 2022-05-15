@@ -30,3 +30,6 @@ Route.get('/products/:id', 'ProductsController.show')
 Route.post('/products', 'ProductsController.store')
 Route.put('/products/:id', 'ProductsController.update')
 Route.delete('/products/:id', 'ProductsController.destroy')
+
+//login
+Route.post('/login', 'AuthController.login')
