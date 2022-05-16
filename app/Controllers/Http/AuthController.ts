@@ -9,9 +9,9 @@ export default class AuthController {
     try {
       await User.create(data);
 
-      response.created({ status: 'Usuário cadastrado com sucesso!' });
+      response.created({ message: 'Usuário cadastrado com sucesso!' });
     } catch (error) {
-      response.internalServerError({ error: 'Ops, algo de errado aconteceu!' });
+      response.internalServerError({ message: 'Ops, algo de errado aconteceu!' });
     }
   }
 
@@ -23,18 +23,18 @@ export default class AuthController {
 
       if (user) {
         if (user.password !== data.password) {
-          response.unauthorized({ error: 'Usuário ou senha inválidos!' });
+          response.unauthorized({ message: 'Usuário ou senha inválidos!' });
         }else{
           response.ok({ token: user.getToken() });
         }
 
       }else{
-        response.notFound({ error: 'Desculpe, não encontramos o usuário :(' });
+        response.notFound({ message: 'O usuário informado não existe.' });
       }
 
 
     } catch (error) {
-      response.internalServerError({ error: 'Ops, algo de errado aconteceu!' });
+      response.internalServerError({ message: 'Ops, algo de errado aconteceu!' });
     }
   }
 
