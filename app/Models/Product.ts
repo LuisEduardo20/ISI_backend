@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { ProductType } from './enums/ProductType'
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })
@@ -16,6 +17,12 @@ export default class Product extends BaseModel {
 
   @column()
   public email_fornecedor: string
+
+  @column()
+  public type: ProductType
+
+  @column()
+  public price: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

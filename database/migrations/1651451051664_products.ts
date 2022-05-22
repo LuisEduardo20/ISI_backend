@@ -1,4 +1,5 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
+import { ProductType } from 'App/Models/enums/ProductType'
 
 export default class Products extends BaseSchema {
   protected tableName = 'products'
@@ -14,6 +15,10 @@ export default class Products extends BaseSchema {
       table.string('nome_fornecedor').notNullable()
 
       table.string('email_fornecedor').notNullable()
+
+      table.double('price').notNullable()
+
+      table.enum('type', Object.values(ProductType)).notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
