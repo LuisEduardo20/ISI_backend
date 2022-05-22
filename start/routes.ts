@@ -25,11 +25,17 @@ Route.get('/', async () => {
 })
 
 // Produto
-Route.get('/products', 'ProductsController.index')
-Route.get('/products/:id', 'ProductsController.show')
-Route.post('/products', 'ProductsController.store')
-Route.put('/products/:id', 'ProductsController.update')
-Route.delete('/products/:id', 'ProductsController.destroy')
+Route.group(() => {
+  Route.get('/', 'ProductsController.index')
+  Route.get('/:id', 'ProductsController.show')
+  Route.post('/', 'ProductsController.store')
+  Route.put('/:id', 'ProductsController.update')
+  Route.delete('/:id', 'ProductsController.destroy')
+}).prefix('products')
+
+//Filtros de produtos
+Route.get('/snacks', 'ProductsController.getSnackProducts')
+Route.get('/drinks', 'ProductsController.getDrinkProducts')
 
 //login
 Route.post('/login', 'AuthController.login')

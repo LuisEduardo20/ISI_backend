@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Database from '@ioc:Adonis/Lucid/Database'
 
 import Product from '../../Models/Product'
 
@@ -82,4 +83,26 @@ export default class ProductsController {
       response.internalServerError({ error: 'Ops, algo de errado aconteceu!' })
     }
   }
+
+  public async getSnackProducts({ response }: HttpContextContract) {
+    try {
+      const products = await Database.from('products').where('tipo', 'petisco')
+
+      response.ok(products)
+    } catch (error) {
+      console.log(error)
+      response.internalServerError({ error: 'Ops, algo de errado aconteceu!' })
+    }
+  }
+
+  public async getDrinkProducts({ response }: HttpContextContract) {
+    try {
+      const products = await Database.from('products').where('tipo', 'bebida')
+
+      response.ok(products)
+    } catch (error) {
+      response.internalServerError({ error: 'Ops, teste!' })
+    }
+  }
+
 }
