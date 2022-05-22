@@ -27,7 +27,6 @@ export default class AuthController {
         }else{
           response.ok({ token: user.getToken() });
         }
-
       }else{
         response.notFound({ message: 'O usuário informado não existe.' });
       }
