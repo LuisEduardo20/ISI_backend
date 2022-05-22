@@ -19,10 +19,10 @@ export default class Product extends BaseModel {
   public email_fornecedor: string
 
   @column()
-  public type: ProductType
+  public tipo: ProductType
 
   @column()
-  public price: number
+  public preco: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

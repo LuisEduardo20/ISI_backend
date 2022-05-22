@@ -8,7 +8,7 @@ export default class Products extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
 
-      table.string('codigo', 15).notNullable()
+      table.string('codigo', 15).unique().notNullable()
 
       table.string('nome').notNullable()
 
@@ -16,9 +16,9 @@ export default class Products extends BaseSchema {
 
       table.string('email_fornecedor').notNullable()
 
-      table.double('price').notNullable()
+      table.float('preco').notNullable()
 
-      table.enum('type', Object.values(ProductType)).notNullable()
+      table.enum('tipo', Object.values(ProductType)).notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

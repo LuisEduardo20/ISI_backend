@@ -33,7 +33,7 @@ export default class ProductsController {
   }
 
   public async store({ request, response }: HttpContextContract) {
-    const data = request.only(['codigo', 'nome', 'nome_fornecedor', 'email_fornecedor'])
+    const data = request.only(['codigo', 'nome', 'nome_fornecedor', 'email_fornecedor', 'preco', 'tipo'])
 
     try {
       await Product.create(data)
