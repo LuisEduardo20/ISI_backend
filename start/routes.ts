@@ -39,3 +39,12 @@ Route.get('/drinks', 'ProductsController.getDrinkProducts')
 
 //login
 Route.post('/login', 'AuthController.login')
+
+//show
+Route.group(() => {
+  Route.get('/', 'ShowsController.index')
+  Route.get('/:id', 'ShowsController.show')
+  Route.post('/', 'ShowsController.store')
+  Route.put('/:id', 'ShowsController.update')
+  Route.delete('/:id', 'ShowsController.destroy')
+}).prefix('shows')
